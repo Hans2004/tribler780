@@ -14,8 +14,8 @@ Install LXD: sudo snap install lxd sudo lxd init sudo usermod -a -G lxd ${USER} 
 
 Create a directory for the source of the app to be snapped. Inside this directory create a snapcraft.yaml file Then type: snapcraft --use-lxd
 
-If snapcraft succeeds, you can install the snap as follows: snap install --devmode --dangerous ./test-tribler_7.7.1_amd64.snap
+If snapcraft succeeds, you can install the snap as follows: snap install --devmode ./test-tribler780_7.8.0_amd64.snap
 
-And then you can run the snap with the command: test-tribler.tribler
+And then you can run the snap with the command: test-tribler780.tribler
 
 NOTE: If the snapcraft command proceeds slowly or ends with an error concerning memory, you must delete old LXC containers: lxc list lxc delete [name of container]
