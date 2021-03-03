@@ -8,9 +8,7 @@ confinement: strict
 grade: stable
 license: LGPL-2.0
 
-architectures:
-  - build-on: amd64
-    run-on: [amd64, i386]
+architectures: [amd64, i386]
 
 parts:
   tribler:
