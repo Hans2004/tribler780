@@ -1,0 +1,89 @@
+name: test-tribler780
+version: 7.8.0
+summary: OnionTorrent
+description: |
+  A torrent client that uses its own onion network
+base: core18
+confinement: strict
+grade: stable
+license: LGPL-2.0
+    
+parts:
+  tribler:
+    source: https://github.com/Tribler/tribler/releases/download/v7.8.0/tribler_7.8.0_all.deb
+    plugin: dump
+    source-type: deb
+#    python-version: python3
+#    source: .
+    stage-packages:
+      - libssl-dev
+      - libx11-6
+      - libgmp-dev
+      - python3.8
+      - python3.8-minimal
+      - python3-pip
+      - python3-libtorrent
+      - python3-pyqt5
+      - python3-pyqt5.qtsvg
+      - python3-scipy
+      - python3.8-dev
+      - openssl
+      - libssl1.1
+      - python3-setuptools
+      - wget
+      - libcairo-gobject2
+      - libgtk-3-0
+#      - libwayland-cursor0
+#      - libwayland-egl1
+      - libsodium23
+      - python3-pysodium
+      - mesa-utils
+      - libgl1-mesa-dri
+      - mesa-va-drivers
+      - libglu1-mesa
+#      - cython3
+      
+    override-stage: |
+      snapcraftctl stage
+      python3.8 -m pip install wheel
+      python3.8 -m pip install aiohttp
+      python3.8 -m pip install aiohttp_apispec
+      python3.8 -m pip install chardet 
+      python3.8 -m pip install configobj
+      python3.8 -m pip install decorator
+      python3.8 -m pip install libnacl
+      python3.8 -m pip install matplotlib
+      python3.8 -m pip install netifaces
+      python3.8 -m pip install networkx
+      python3.8 -m pip install pony
+      python3.8 -m pip install psutil
+      python3.8 -m pip install pyasn1
+      python3.8 -m pip install requests
+      python3.8 -m pip install lz4
+      python3.8 -m pip install pyqtgraph
+      python3.8 -m pip install pyyaml
+      python3.8 -m pip install cython
+      #wget https://github.com/Tribler/tribler/releases/download/v7.7.1/tribler_7.7.1_all.deb
+      #apt install ./stage/tribler_7.7.1_all.deb
+      # Point icon to the correct location
+      sed -i.bak -e 's|Icon=tribler|Icon=/usr/share/tribler/images/tribler.png|g' usr/share/applications/tribler.desktop
+
+apps:
+  tribler:
+    command: usr/share/tribler/tribler
+    desktop: usr/share/applications/tribler.desktop
+    environment:
+      LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/mesa-gl:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/xorg:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio/
+      LIBGL_DRIVERS_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri 
+      DISABLE_WAYLAND: 1
+
+    plugs:
+      - home
+      - network
+      - opengl
+      - removable-media
+      - unity7
+      - x11
+      - wayland
+      - desktop
+      - desktop-legacy
