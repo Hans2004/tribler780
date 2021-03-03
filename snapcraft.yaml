@@ -38,6 +38,7 @@ parts:
 #      - libwayland-cursor0
 #      - libwayland-egl1
       - libsodium23
+      - libsodium-dev
       - python3-pysodium
       - mesa-utils
       - libgl1-mesa-dri
