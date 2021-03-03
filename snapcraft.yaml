@@ -9,7 +9,7 @@ grade: stable
 license: LGPL-2.0
 
 architectures:
-  - build-on: i386
+  - build-on: amd64
     run-on: [amd64, i386]
 
 parts:
